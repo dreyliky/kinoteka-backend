@@ -1,4 +1,4 @@
-const interestedFormats = ['[360p]', '[1080p]', '[720p]', '[480p]'];
+const interestedFormats = ['[1080p]', '[720p]', '[480p]'];
 const mediaType = '.mp4';
 const htmlPartFrom = '<input type="hidden" id="files" value="';
 const htmlPartTo = '">';
