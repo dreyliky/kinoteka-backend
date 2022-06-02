@@ -38,9 +38,9 @@ export class FilmDownloaderService {
     private processFilmDownloadInBackground(fileUrl: string, film: ShortFilm): void {
         this.downloadingFilmsState.add(film.kinopoiskId);
         
-        this.fileDownloader.download(fileUrl, this.getFilmFileFinalPath(film.kinopoiskId))
+        this.fileDownloader.download(fileUrl, `${film.kinopoiskId}.mp4`)
             .pipe(
-                switchMap(() => this.fileDownloader.download(this.getFilmPreviewUrl(film), this.getFilmPreviewFileFinalPath(film.kinopoiskId))),
+                switchMap(() => this.fileDownloader.download(this.getFilmPreviewUrl(film), `${film.kinopoiskId}.jpg`)),
                 tap(() => this.filmsRepository.save(film)),
                 tap(() => this.downloadingFilmsState.remove(film.kinopoiskId))
             )
