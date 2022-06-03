@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
-global.__basedir = 'C:';
+global.__downloadFolder = `C:/_kinoteka_downloads`;
+global.__dbFolder = `C:/_kinoteka_db`;
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, { cors: { origin: true } });

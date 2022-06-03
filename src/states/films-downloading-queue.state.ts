@@ -45,6 +45,15 @@ export class FilmsDownloadingQueueState {
         this._onQueueUpdated$.next(true);
     }
 
+    public addAsFirst(film: ShortFilm): void {
+        const filmQueue = new ShortFilmQueue(film);
+
+        this.queue.unshift(film.kinopoiskId);
+        this._data.set(film.kinopoiskId, filmQueue);
+        this._onFilmAdded$.next(filmQueue);
+        this._onQueueUpdated$.next(true);
+    }
+
     public has(kinopoiskId: string): boolean {
         return this._data.has(kinopoiskId);
     }

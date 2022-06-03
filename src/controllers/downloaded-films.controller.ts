@@ -16,12 +16,12 @@ export class DownloadedFilmsController {
 
     @Get(':kinopoiskId/preview')
     public getPreview(@Param('kinopoiskId') kinopoiskId: string, @Response() response): void {
-        response.sendFile(`${global.__basedir}/downloads/${kinopoiskId}.jpg`);
+        response.sendFile(`${global.__downloadFolder}/${kinopoiskId}.jpg`);
     }
 
     @Get(':kinopoiskId')
     public get(@Param('kinopoiskId') kinopoiskId: string, @Response() response): void {
-        response.sendFile(`${global.__basedir}/downloads/${kinopoiskId}.mp4`);
+        response.sendFile(`${global.__downloadFolder}/${kinopoiskId}.mp4`);
     }
 
     @Delete(':kinopoiskId')
