@@ -35,7 +35,6 @@ export class FilmsDownloadingQueueService {
             const downloadSubscription = this.downloader.download(firstFilm.data)
                 .pipe(catchError((error) => {
                     this.remove(firstFilm.data.kinopoiskId);
-                    this.queueState.addAsFirst(firstFilm.data);
 
                     return throwError(() => new Error(error));
                 }))
