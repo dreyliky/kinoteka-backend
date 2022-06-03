@@ -5,11 +5,11 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { FilmsRepository } from '@repositories';
 import { map, Observable, of } from 'rxjs';
-import { catchError, concatAll, delayWhen, filter, finalize, switchMap, take } from 'rxjs/operators';
+import { catchError, concatAll, delayWhen, filter, finalize, switchMap, take, timeout } from 'rxjs/operators';
 
 @Injectable()
 export class FilmDownloaderService {
-    private readonly downloadsPath = `${global.__basedir}/downloads`;
+    private readonly downloadsPath = `${global.__basedir}/_kinoteka_downloads`;
 
     constructor(
         private readonly http: HttpService,
@@ -45,6 +45,7 @@ export class FilmDownloaderService {
                 .pipe(
                     concatAll(),
                     filter((response) => (response.status === 200)),
+                    timeout(10000),
                     take(1),
                     map((response) => response.request.res.responseUrl)
                 );

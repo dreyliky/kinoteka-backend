@@ -4,7 +4,7 @@ import { LocalStorage } from 'node-localstorage';
 
 @Injectable()
 export class FilmsRepository {
-    private readonly localStorage = new LocalStorage(`${global.__basedir}/db`);
+    private readonly localStorage = new LocalStorage(`${global.__basedir}/_kinoteka_db`);
     private readonly storageKey = `films`;
 
     public getAll(): ShortFilm[] {

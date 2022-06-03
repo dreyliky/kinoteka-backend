@@ -11,7 +11,7 @@ export class FileDownloaderService {
                 url,
                 fileName,
                 onProgress: (percents) => subscriber.next(+percents),
-                directory: `${global.__basedir}/downloads`,
+                directory: `${global.__basedir}/_kinoteka_downloads`,
             });
 
             downloader.download()
