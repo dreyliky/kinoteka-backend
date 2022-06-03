@@ -9,8 +9,6 @@ import { catchError, concatAll, delayWhen, filter, finalize, switchMap, take } f
 
 @Injectable()
 export class FilmDownloaderService {
-    private readonly downloadsPath = `${global.__basedir}/_kinoteka_downloads`;
-
     constructor(
         private readonly http: HttpService,
         private readonly fileDownloader: FileDownloaderService,
@@ -51,7 +49,7 @@ export class FilmDownloaderService {
     }
 
     private getFilmFileFinalPath(kinopoiskId: string): string {
-        return `${this.downloadsPath}/${kinopoiskId}.mp4`;
+        return `${global.__downloadFolder}/${kinopoiskId}.mp4`;
     }
 
     private getFilmPreviewUrl(film: ShortFilm): string {
@@ -59,6 +57,6 @@ export class FilmDownloaderService {
     }
 
     private getFilmPreviewFileFinalPath(kinopoiskId: string): string {
-        return `${this.downloadsPath}/${kinopoiskId}.jpg`;
+        return `${global.__downloadFolder}/${kinopoiskId}.jpg`;
     }
 }
