@@ -1,19 +1,19 @@
 import { FilmDownloadStateEnum } from '@enums';
 import { Injectable } from '@nestjs/common';
 import { FilmsRepository } from '@repositories';
-import { DownloadingFilmsState } from '@states';
+import { FilmsDownloadingQueueState } from '@states';
 
 @Injectable()
 export class FilmDownloadStateService {
     constructor(
         private readonly filmsRepository: FilmsRepository,
-        private readonly downloadingFilmsState: DownloadingFilmsState
+        private readonly filmsDownloadingQueueService: FilmsDownloadingQueueState
     ) {}
 
     public check(kinopoiskId: string): FilmDownloadStateEnum {
         if (this.filmsRepository.includes(kinopoiskId)) {
             return FilmDownloadStateEnum.Downloaded;
-        } else if (this.downloadingFilmsState.includes(kinopoiskId)) {
+        } else if (this.filmsDownloadingQueueService.has(kinopoiskId)) {
             return FilmDownloadStateEnum.Downloading;
         }
 

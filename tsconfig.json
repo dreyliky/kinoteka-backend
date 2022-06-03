@@ -31,6 +31,8 @@
         "@repositories/*": ["./src/repositories/*"],
         "@controllers": ["./src/controllers"],
         "@controllers/*": ["./src/controllers/*"],
+        "@classes": ["./src/classes"],
+        "@classes/*": ["./src/classes/*"],
         "@interfaces": ["./src/interfaces"],
         "@interfaces/*": ["./src/interfaces/*"],
     }

@@ -1,31 +1,35 @@
-const interestedFormats = ['[1080p]', '[720p]', '[480p]'];
+const interestedFormats = ['[1080p]', '[720p]', '[480p]', '[360p]'];
 const mediaType = '.mp4';
 const htmlPartFrom = '<input type="hidden" id="files" value="';
 const htmlPartTo = '">';
 
-export function convertFilmIframeHtmlToFileUrl(html: string): string {
+export function convertFilmIframeHtmlToFileUrl(html: string): string[] {
     const htmlPartFromIndex = html.indexOf(htmlPartFrom);
     const htmlPartToIndex = html.indexOf(htmlPartTo, htmlPartFromIndex);
     const interestedHtml = html.slice(htmlPartFromIndex, htmlPartToIndex);
-    let videoUrl: string;
+    let videoUrls: string[] = [];
 
     for (let format of interestedFormats) {
-        const formatIndex = interestedHtml.indexOf(format);
-        let urlStartIndex: number;
-        let urlEndIndex: number;
+        let urlEndIndex: number = 0;
+        let formatIndex = 0;
 
-        if (formatIndex !== -1) {
-            urlStartIndex = (formatIndex + format.length);
-            urlEndIndex = (interestedHtml.indexOf(mediaType, urlStartIndex) + mediaType.length);
-            videoUrl = interestedHtml
-                .slice(urlStartIndex, urlEndIndex)
-                .replace(/\\/g, '')
-                .slice(2);
-            videoUrl = `http://${videoUrl}`;
+        while (interestedHtml.indexOf(format, urlEndIndex) !== -1) {
+            formatIndex = interestedHtml.indexOf(format, urlEndIndex)
+            let urlStartIndex: number;
 
-            break;
+            if (formatIndex !== -1) {
+                urlStartIndex = (formatIndex + format.length);
+                urlEndIndex = (interestedHtml.indexOf(mediaType, urlStartIndex) + mediaType.length);
+                let videoUrl = interestedHtml
+                    .slice(urlStartIndex, urlEndIndex)
+                    .replace(/\\/g, '')
+                    .slice(2);
+                videoUrl = `http://${videoUrl}`;
+
+                videoUrls.push(videoUrl);
+            }
         }
     }
 
-    return (videoUrl ?? null);
+    return videoUrls;
 }

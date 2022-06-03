@@ -1,14 +1,16 @@
 import { FilmDownloadStateEnum } from '@enums';
 import { FilmsFilters, ShortFilm, ShortFilmsResponse } from '@interfaces';
-import { Controller, Delete, Get, Param, Post, Query, Response } from '@nestjs/common';
-import { FilmDownloaderService, FilmDownloadStateService, FilmsService } from '@services';
-import { Observable, switchMap } from 'rxjs';
+import { Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { FilmDownloaderService, FilmDownloadStateService, FilmsDownloadingQueueService, FilmsService } from '@services';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Controller('films')
 export class FilmsController {
     constructor(
         private readonly filmsService: FilmsService,
         private readonly filmsDownloaderService: FilmDownloaderService,
+        private readonly filmsDownloadingQueueService: FilmsDownloadingQueueService,
         private readonly filmDownloadStateService: FilmDownloadStateService
     ) {}
 
@@ -17,36 +19,16 @@ export class FilmsController {
         return this.filmsService.getAll(filters);
     }
 
-    @Get('/downloaded')
-    public getAllDownloaded(): ShortFilm[] {
-        return this.filmsService.getAllDownloaded();
-    }
-
-    @Get(':kinopoiskId/preview')
-    public getPreview(@Param('kinopoiskId') kinopoiskId: string, @Response() response): void {
-        response.sendFile(`${global.__basedir}/downloads/${kinopoiskId}.jpg`);
-    }
-
-    @Get(':kinopoiskId/downloaded')
-    public getDownloaded(@Param('kinopoiskId') kinopoiskId: string, @Response() response): void {
-        response.sendFile(`${global.__basedir}/downloads/${kinopoiskId}.mp4`);
-    }
-
-    @Get(':kinopoiskId/state')
-    public isDownloaded(@Param('kinopoiskId') kinopoiskId: string): FilmDownloadStateEnum {
-        return this.filmDownloadStateService.check(kinopoiskId);
-    }
-
     @Post(':kinopoiskId/download')
     public download(@Param('kinopoiskId') kinopoiskId: string): Observable<unknown> {
         return this.filmsService.get(kinopoiskId)
             .pipe(
-                switchMap((film) => this.filmsDownloaderService.download(film))
+                tap((film: ShortFilm) => this.filmsDownloadingQueueService.add(film))
             );
     }
 
-    @Delete(':kinopoiskId/downloaded')
-    public deleteDownloaded(@Param('kinopoiskId') kinopoiskId: string): boolean {
-        return this.filmsDownloaderService.delete(kinopoiskId);
+    @Get(':kinopoiskId/state')
+    public getState(@Param('kinopoiskId') kinopoiskId: string): FilmDownloadStateEnum {
+        return this.filmDownloadStateService.check(kinopoiskId);
     }
 }

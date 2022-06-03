@@ -5,24 +5,28 @@ const Downloader = require('nodejs-file-downloader');
 
 @Injectable()
 export class FileDownloaderService {
-    public download(url: string, fileName: string): Observable<unknown> {
+    public download(url: string, fileName: string): Observable<number> {
         return new Observable((subscriber) => {
             const downloader = new Downloader({
                 url,
                 fileName,
-                directory: `${global.__basedir}/downloads`
+                onProgress: (percents) => subscriber.next(+percents),
+                directory: `${global.__basedir}/downloads`,
             });
 
             downloader.download()
-                .then(() => {
-                    subscriber.next();
-                    subscriber.complete();
-                })
+                .then(() => subscriber.complete())
                 .catch(() => subscriber.error());
+
+            return {
+                unsubscribe: () => downloader.cancel()
+            };
         });
     }
 
     public delete(filePath: string): void {
-        fs.unlinkSync(filePath);
+        try {
+            fs.unlinkSync(filePath);
+        } catch (error) {}
     }
 }
