@@ -10,6 +10,7 @@ import {
     FilmsDownloadSocketService,
     FilmsService
 } from '@services';
+import { FilmsDownloadingCountSocketService } from '@services/films-downloading-count-socket.service';
 import { FilmsDownloadingQueueState } from './states';
 
 @Module({
@@ -30,6 +31,7 @@ import { FilmsDownloadingQueueState } from './states';
         FilmsService,
         FilmsDownloadingQueueService,
         FilmDownloaderService,
+        FilmsDownloadingCountSocketService,
         FilmsDownloadSocketService
     ]
 })
