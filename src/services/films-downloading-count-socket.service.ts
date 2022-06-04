@@ -6,11 +6,14 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class FilmsDownloadingCountSocketService {
+    private data: number = 0;
+
     constructor(
         private readonly socketService: SocketService,
         private readonly filmsDownloadingQueueState: FilmsDownloadingQueueState
     ) {
         this.initFilmsQueueUpdatesObserver();
+        this.initSocketConnectionObserver();
     }
 
     private initFilmsQueueUpdatesObserver(): void {
@@ -19,9 +22,14 @@ export class FilmsDownloadingCountSocketService {
                 map(() => this.filmsDownloadingQueueState.getAll().length)
             )
             .subscribe((count) => {
-                console.log(count);
-                this.socketService.sockets
-                    .forEach((socket) => socket.emit(SocketEventEnum.DownloadingFilmsCount, count));
+                this.data = count;
+
+                this.socketService.notifyAll(SocketEventEnum.DownloadingFilmsCount, count);
             });
+    }
+
+    private initSocketConnectionObserver(): void {
+        this.socketService.onSocketConnect$
+            .subscribe((socket) => socket.emit(SocketEventEnum.DownloadingFilmsCount, this.data));
     }
 }

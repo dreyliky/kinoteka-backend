@@ -22,7 +22,7 @@ export class FilmsRepository {
 
     public save(film: ShortFilm): void {
         const films = this.getAll();
-        const newFilms = [...films, film];
+        const newFilms = [film, ...films];
 
         this.localStorage.setItem(
             this.storageKey,

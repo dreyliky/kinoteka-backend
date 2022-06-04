@@ -1,7 +1,7 @@
 import { ShortFilmQueue } from '@classes';
 import { SocketService } from '@core';
 import { SocketEventEnum } from '@enums';
-import { FilmProgressDto } from '@interfaces/film-progress-dto.interface';
+import { FilmProgressDto } from '@interfaces';
 import { Injectable } from '@nestjs/common';
 import { FilmsDownloadingQueueState } from '@states';
 import { tap } from 'rxjs/operators';
@@ -18,6 +18,7 @@ export class FilmsDownloadSocketService {
     private initFilmQueueObserver(): void {
         this.filmsDownloadingQueueState.onFilmAdded$
             .subscribe((film) => {
+                this.socketService.notifyAll(SocketEventEnum.FilmDownloadStart, film.data);
                 this.initFilmDownloadProgressObserver(film);
                 this.initFilmDownloadCancelObserver(film);
                 this.initFilmDownloadEndObserver(film);
@@ -28,29 +29,23 @@ export class FilmsDownloadSocketService {
         film.downloadProgress$.pipe(
             tap((downloadProgress) => {
                 const dto: FilmProgressDto = { kinopoiskId: film.data.kinopoiskId, downloadProgress };
-                this.socketService.sockets
-                    .forEach((socket) => socket.emit(SocketEventEnum.FilmProgress, dto));
+
+                this.socketService.notifyAll(SocketEventEnum.FilmProgress, dto);
             })
         )
         .subscribe();
     }
-    
+
     private initFilmDownloadCancelObserver(film: ShortFilmQueue): void {
         film.cancelDownload$.pipe(
-            tap(() => {
-                this.socketService.sockets
-                    .forEach((socket) => socket.emit(SocketEventEnum.FilmDownloadCancel, film.data.kinopoiskId));
-            })
+            tap(() => this.socketService.notifyAll(SocketEventEnum.FilmDownloadCancel, film.data))
         )
         .subscribe();
     }
 
     private initFilmDownloadEndObserver(film: ShortFilmQueue): void {
         film.endDownload$.pipe(
-            tap(() => {
-                this.socketService.sockets
-                    .forEach((socket) => socket.emit(SocketEventEnum.FilmDownloadEnd, film.data.kinopoiskId));
-            })
+            tap(() => this.socketService.notifyAll(SocketEventEnum.FilmDownloadEnd, film.data))
         )
         .subscribe();
     }

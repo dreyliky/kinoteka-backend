@@ -1,3 +1,4 @@
+export * from './film-progress-dto.interface';
 export * from './film-short-queue-dto.interface';
 export * from './film-short.interface';
 export * from './film.interface';
