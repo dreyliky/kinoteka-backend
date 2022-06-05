@@ -6,11 +6,12 @@ import { FilmsRepository } from '@repositories';
 import {
     FilmDownloaderService,
     FilmDownloadStateService,
+    FilmMediaFilesService,
+    FilmsDownloadingCountSocketService,
     FilmsDownloadingQueueService,
     FilmsDownloadSocketService,
     FilmsService
 } from '@services';
-import { FilmsDownloadingCountSocketService } from '@services/films-downloading-count-socket.service';
 import { FilmsDownloadingQueueState } from './states';
 
 @Module({
@@ -31,6 +32,7 @@ import { FilmsDownloadingQueueState } from './states';
         FilmsService,
         FilmsDownloadingQueueService,
         FilmDownloaderService,
+        FilmMediaFilesService,
         FilmsDownloadingCountSocketService,
         FilmsDownloadSocketService
     ]
