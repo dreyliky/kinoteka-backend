@@ -1,4 +1,4 @@
-import { ShortFilm } from '@interfaces/film';
+import { DownloadedFilm } from '@interfaces/film';
 import { Controller, Delete, Get, Param, Response } from '@nestjs/common';
 import { DownloadedFilmsService, FilmDownloaderService, FilmMediaPathService } from '@services/film';
 
@@ -11,7 +11,7 @@ export class DownloadedFilmsController {
     ) {}
 
     @Get()
-    public getAll(): ShortFilm[] {
+    public getAll(): DownloadedFilm[] {
         return this.downloadedFilmsService.getAll();
     }
 

@@ -1,4 +1,4 @@
-import { ShortFilm } from '@interfaces/film';
+import { DownloadedFilm } from '@interfaces/film';
 import { Injectable } from '@nestjs/common';
 import { LocalStorage } from 'node-localstorage';
 
@@ -7,7 +7,7 @@ export class FilmsRepository {
     private readonly localStorage = new LocalStorage(`${global.__dbFolder}`);
     private readonly storageKey = `films`;
 
-    public getAll(): ShortFilm[] {
+    public getAll(): DownloadedFilm[] {
         try {
             return JSON.parse(this.localStorage.getItem(this.storageKey)) ?? [];
         } catch (error) {
@@ -15,12 +15,12 @@ export class FilmsRepository {
         }
     }
 
-    public get(kinopoiskId: string): ShortFilm {
+    public get(kinopoiskId: string): DownloadedFilm {
         return this.getAll()
             .find((film) => film.kinopoiskId === kinopoiskId);
     }
 
-    public save(film: ShortFilm): void {
+    public save(film: DownloadedFilm): void {
         const films = this.getAll();
         const newFilms = [film, ...films];
 

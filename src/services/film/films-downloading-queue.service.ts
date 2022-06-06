@@ -1,4 +1,4 @@
-import { ShortFilmQueue } from '@classes/core';
+import { MediaDownloadQueue } from '@classes/core';
 import { ShortFilm } from '@interfaces/film';
 import { Injectable } from '@nestjs/common';
 import { FilmsDownloadingQueueState } from '@states/film';
@@ -14,7 +14,7 @@ export class FilmsDownloadingQueueService {
         this.initQueueUpdatesObserver();
     }
 
-    public getAll(): ShortFilmQueue[] {
+    public getAll(): MediaDownloadQueue<ShortFilm>[] {
         return this.queueState.getAll();
     }
 

@@ -1,3 +1,4 @@
+import { adaptShortFilmToDownloadedFilm } from '@adapters/film';
 import { convertFilmIframeHtmlToFileUrl } from '@helpers/film';
 import { ShortFilm } from '@interfaces/film';
 import { HttpService } from '@nestjs/axios';
@@ -13,15 +14,19 @@ export class FilmDownloaderService {
     constructor(
         private readonly http: HttpService,
         private readonly fileDownloader: FileDownloaderService,
-        private readonly filmsRepository: FilmsRepository,
-        private readonly filmMediaPathService: FilmMediaPathService
+        private readonly filmMediaPathService: FilmMediaPathService,
+        private readonly filmsRepository: FilmsRepository
     ) {}
 
     public download(film: ShortFilm, translationId: number): Observable<number> {
         return this.downloadPreview(film)
             .pipe(
                 switchMap(() => this.downloadMedia(film, translationId)),
-                finalize(() => this.filmsRepository.save(film))
+                finalize(() => {
+                    const downloadedFilm = adaptShortFilmToDownloadedFilm(film, translationId);
+
+                    this.filmsRepository.save(downloadedFilm);
+                })
             );
     }
 

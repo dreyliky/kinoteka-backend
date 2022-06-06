@@ -1,4 +1,4 @@
-import { ShortFilmQueue } from '@classes/core';
+import { MediaDownloadQueue } from '@classes/core';
 import { ShortFilm } from '@interfaces/film';
 import { Injectable } from '@nestjs/common';
 import { Observable, Subject } from 'rxjs';
@@ -9,22 +9,22 @@ export class FilmsDownloadingQueueState {
         return this._onQueueUpdated$.asObservable();
     }
 
-    public get onFilmAdded$(): Observable<ShortFilmQueue> {
+    public get onFilmAdded$(): Observable<MediaDownloadQueue<ShortFilm>> {
         return this._onFilmAdded$.asObservable();
     }
 
-    public get onFilmRemoved$(): Observable<ShortFilmQueue> {
+    public get onFilmRemoved$(): Observable<MediaDownloadQueue<ShortFilm>> {
         return this._onFilmRemoved$.asObservable();
     }
 
-    private readonly _data = new Map<string, ShortFilmQueue>();
+    private readonly _data = new Map<string, MediaDownloadQueue<ShortFilm>>();
     private readonly queue: string[] = [];
 
-    private readonly _onFilmAdded$ = new Subject<ShortFilmQueue>();
-    private readonly _onFilmRemoved$ = new Subject<ShortFilmQueue>();
+    private readonly _onFilmAdded$ = new Subject<MediaDownloadQueue<ShortFilm>>();
+    private readonly _onFilmRemoved$ = new Subject<MediaDownloadQueue<ShortFilm>>();
     private readonly _onQueueUpdated$ = new Subject<boolean>();
 
-    public getFirst(): ShortFilmQueue | null {
+    public getFirst(): MediaDownloadQueue<ShortFilm> | null {
         if (this.queue[0]) {
             return this._data.get(this.queue[0]);
         }
@@ -32,12 +32,12 @@ export class FilmsDownloadingQueueState {
         return null;
     }
 
-    public getAll(): ShortFilmQueue[] {
+    public getAll(): MediaDownloadQueue<ShortFilm>[] {
         return [...this._data.values()];
     }
 
     public add(film: ShortFilm, translationId: number): void {
-        const filmQueue = new ShortFilmQueue(film, translationId);
+        const filmQueue = new MediaDownloadQueue(film, translationId);
 
         this.queue.push(film.kinopoiskId);
         this._data.set(film.kinopoiskId, filmQueue);
@@ -46,7 +46,7 @@ export class FilmsDownloadingQueueState {
     }
 
     public addAsFirst(film: ShortFilm, translationId: number): void {
-        const filmQueue = new ShortFilmQueue(film, translationId);
+        const filmQueue = new MediaDownloadQueue(film, translationId);
 
         this.queue.unshift(film.kinopoiskId);
         this._data.set(film.kinopoiskId, filmQueue);

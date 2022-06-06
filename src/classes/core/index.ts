@@ -1,2 +1,2 @@
-export * from './short-film-queue.class';
+export * from './media-download-queue.class';
 

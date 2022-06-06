@@ -1,5 +1,5 @@
-import { adaptShortFilmQueueToDto } from '@adapters/film';
-import { ShortFilmQueueDto } from '@interfaces/film';
+import { adaptMediaDownloadQueueToDto } from '@adapters/film';
+import { MediaDownloadQueueDto } from '@interfaces/core';
 import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { FilmsDownloadingQueueService } from '@services/film';
 
@@ -10,9 +10,9 @@ export class DownloadingFilmsController {
     ) {}
 
     @Get()
-    public getAll(): ShortFilmQueueDto[] {
+    public getAll(): MediaDownloadQueueDto[] {
         return this.filmsDownloadingQueueService.getAll()
-            .map((filmQueue) => adaptShortFilmQueueToDto(filmQueue));
+            .map((filmQueue) => adaptMediaDownloadQueueToDto(filmQueue));
     }
 
     @Delete(':kinopoiskId')

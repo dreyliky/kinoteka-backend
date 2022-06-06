@@ -12,18 +12,15 @@ interface SplittedFilePath {
 export class FileDownloaderService {
     public download(url: string, filePath: string): Observable<number> {
         const { directory, fileName } = this.splitFilePath(filePath);
-        
+
         return new Observable((subscriber) => {
             const downloader = new Downloader({
                 url,
                 fileName,
                 directory,
-                onProgress: (percents) => subscriber.next(+percents),
-                shouldStop: (error) => {
-                    if (error.statusCode && error.statusCode === 404) {
-                        return true;
-                    }
-                }
+                maxAttempts: 999,
+                cloneFiles: false,
+                onProgress: (percents) => subscriber.next(+percents)
             });
 
             downloader.download()

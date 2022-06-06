@@ -1,6 +1,6 @@
-import { ShortFilmQueue } from '@classes/core';
+import { MediaDownloadQueue } from '@classes/core';
 import { SocketEventEnum } from '@enums/core';
-import { FilmProgressDto } from '@interfaces/film';
+import { FilmProgressDto, ShortFilm } from '@interfaces/film';
 import { Injectable } from '@nestjs/common';
 import { SocketService } from '@services/core';
 import { FilmsDownloadingQueueState } from '@states/film';
@@ -25,7 +25,7 @@ export class FilmsDownloadSocketService {
             });
     }
 
-    private initFilmDownloadProgressObserver(film: ShortFilmQueue): void {
+    private initFilmDownloadProgressObserver(film: MediaDownloadQueue<ShortFilm>): void {
         film.downloadProgress$.pipe(
             tap((downloadProgress) => {
                 const dto: FilmProgressDto = { kinopoiskId: film.data.kinopoiskId, downloadProgress };
@@ -36,14 +36,14 @@ export class FilmsDownloadSocketService {
         .subscribe();
     }
 
-    private initFilmDownloadCancelObserver(film: ShortFilmQueue): void {
+    private initFilmDownloadCancelObserver(film: MediaDownloadQueue<ShortFilm>): void {
         film.cancelDownload$.pipe(
             tap(() => this.socketService.notifyAll(SocketEventEnum.FilmDownloadCancel, film.data))
         )
         .subscribe();
     }
 
-    private initFilmDownloadEndObserver(film: ShortFilmQueue): void {
+    private initFilmDownloadEndObserver(film: MediaDownloadQueue<ShortFilm>): void {
         film.endDownload$.pipe(
             tap(() => this.socketService.notifyAll(SocketEventEnum.FilmDownloadEnd, film.data))
         )

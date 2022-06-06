@@ -1,4 +1,4 @@
-import { ShortFilm } from '@interfaces/film';
+import { DownloadedFilm } from '@interfaces/film';
 import { Injectable } from '@nestjs/common';
 import { FilmsRepository } from '@repositories/film';
 
@@ -8,7 +8,7 @@ export class DownloadedFilmsService {
         private readonly filmsRepository: FilmsRepository
     ) {}
 
-    public getAll(): ShortFilm[] {
+    public getAll(): DownloadedFilm[] {
         return this.filmsRepository.getAll();
     }
 }
