@@ -1,6 +1,6 @@
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
-import { FileDownloaderService, SocketService } from '@services/core';
+import { FileDownloaderService, OsService, SocketService } from '@services/core';
 
 @Module({
     imports: [
@@ -8,13 +8,15 @@ import { FileDownloaderService, SocketService } from '@services/core';
     ],
     providers: [
         SocketService,
-        FileDownloaderService
+        FileDownloaderService,
+        OsService
     ],
     exports: [
         HttpModule,
 
         SocketService,
-        FileDownloaderService
+        FileDownloaderService,
+        OsService
     ]
 })
 export class SharedModule {}

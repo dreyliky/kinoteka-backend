@@ -18,8 +18,8 @@ export class FilmsDownloadingQueueService {
         return this.queueState.getAll();
     }
 
-    public add(film: ShortFilm): void {
-        this.queueState.add(film);
+    public add(film: ShortFilm, translationId: number): void {
+        this.queueState.add(film, translationId);
     }
 
     public remove(kinopoiskId: string): void {
@@ -32,7 +32,7 @@ export class FilmsDownloadingQueueService {
         if (firstFilm && !firstFilm.isDownloading) {
             this.queueState.markAsDownloading(firstFilm.data.kinopoiskId);
 
-            const downloadSubscription = this.downloader.download(firstFilm.data)
+            const downloadSubscription = this.downloader.download(firstFilm.data, firstFilm.translationId)
                 .pipe(catchError((error) => {
                     this.remove(firstFilm.data.kinopoiskId);
 

@@ -36,8 +36,8 @@ export class FilmsDownloadingQueueState {
         return [...this._data.values()];
     }
 
-    public add(film: ShortFilm): void {
-        const filmQueue = new ShortFilmQueue(film);
+    public add(film: ShortFilm, translationId: number): void {
+        const filmQueue = new ShortFilmQueue(film, translationId);
 
         this.queue.push(film.kinopoiskId);
         this._data.set(film.kinopoiskId, filmQueue);
@@ -45,8 +45,8 @@ export class FilmsDownloadingQueueState {
         this._onQueueUpdated$.next(true);
     }
 
-    public addAsFirst(film: ShortFilm): void {
-        const filmQueue = new ShortFilmQueue(film);
+    public addAsFirst(film: ShortFilm, translationId: number): void {
+        const filmQueue = new ShortFilmQueue(film, translationId);
 
         this.queue.unshift(film.kinopoiskId);
         this._data.set(film.kinopoiskId, filmQueue);

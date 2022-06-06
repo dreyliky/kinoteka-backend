@@ -7,7 +7,10 @@ export class ShortFilmQueue {
     public readonly cancelDownload$ = new Subject<true>();
     public readonly endDownload$ = new Subject<true>();
     
-    constructor(public readonly data: ShortFilm) {}
+    constructor(
+        public readonly data: ShortFilm,
+        public readonly translationId: number
+    ) {}
 
     public onDestroy(): void {
         if (this.downloadProgress$.value === 100) {

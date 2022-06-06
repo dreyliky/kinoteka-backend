@@ -1,15 +1,14 @@
 import { FilmDownloadStateEnum } from '@enums/film';
-import { FilmMediaFileMetadata, FilmsFilters, ShortFilm, ShortFilmsResponse } from '@interfaces/film';
+import { FilmsFilters, ShortFilm, ShortFilmsResponse } from '@interfaces/film';
 import { Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { FilmDownloadStateService, FilmMediaFilesService, FilmsDownloadingQueueService, FilmsService } from '@services/film';
+import { FilmDownloadStateService, FilmsDownloadingQueueService, FilmsService } from '@services/film';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Controller('films')
 export class FilmsController {
     constructor(
         private readonly filmsService: FilmsService,
-        private readonly filmMediaFilesService: FilmMediaFilesService,
         private readonly filmsDownloadingQueueService: FilmsDownloadingQueueService,
         private readonly filmDownloadStateService: FilmDownloadStateService
     ) {}
@@ -19,19 +18,14 @@ export class FilmsController {
         return this.filmsService.getAllShort(filters);
     }
 
-    @Get(':kinopoiskId/media-files')
-    public getTranslations(@Param('kinopoiskId') kinopoiskId: string): Observable<FilmMediaFileMetadata[]> {
-        return this.filmsService.get(kinopoiskId)
-            .pipe(
-                map((film) => this.filmMediaFilesService.getAll(film))
-            );
-    }
-
-    @Post(':kinopoiskId/download')
-    public download(@Param('kinopoiskId') kinopoiskId: string): Observable<unknown> {
+    @Post(':kinopoiskId/download/:translationId')
+    public download(
+        @Param('kinopoiskId') kinopoiskId: string,
+        @Param('translationId') translationId: string
+    ): Observable<unknown> {
         return this.filmsService.getShort(kinopoiskId)
             .pipe(
-                tap((film: ShortFilm) => this.filmsDownloadingQueueService.add(film))
+                tap((film: ShortFilm) => this.filmsDownloadingQueueService.add(film, +translationId))
             );
     }
 

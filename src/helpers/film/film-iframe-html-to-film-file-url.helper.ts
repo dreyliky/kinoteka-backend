@@ -1,35 +1,29 @@
-const interestedFormats = ['[1080p]', '[720p]', '[480p]', '[360p]'];
+import { FilmMediaFileMetadata } from '@interfaces/film';
+
 const mediaType = '.mp4';
 const htmlPartFrom = '<input type="hidden" id="files" value="';
 const htmlPartTo = '">';
 
-export function convertFilmIframeHtmlToFileUrl(html: string): string[] {
-    const htmlPartFromIndex = html.indexOf(htmlPartFrom);
+interface TranslationsWithRawUrls {
+    [translationId: string]: string;
+}
+
+export function convertFilmIframeHtmlToFileUrl(html: string, media: FilmMediaFileMetadata): string {
+    const interestedFormat = `[${media.maxQuality}p]`;
+    const htmlPartFromIndex = (html.indexOf(htmlPartFrom) + htmlPartFrom.length);
     const htmlPartToIndex = html.indexOf(htmlPartTo, htmlPartFromIndex);
-    const interestedHtml = html.slice(htmlPartFromIndex, htmlPartToIndex);
-    let videoUrls: string[] = [];
+    const interestedJson = html.slice(htmlPartFromIndex, htmlPartToIndex)
+        .replace(/&quot;/g, '"');
+    const medias: TranslationsWithRawUrls = JSON.parse(interestedJson);
+    const rawUrl = medias[media.translationId];
+    const mediaUrlFormatStartIndex = rawUrl.indexOf(interestedFormat);
+    const mediaUrlStartIndex = (mediaUrlFormatStartIndex + interestedFormat.length);
+    const mediaUrlEndIndex = (rawUrl.indexOf(mediaType, mediaUrlStartIndex) + mediaType.length);
+    let videoUrl = rawUrl
+        .slice(mediaUrlStartIndex, mediaUrlEndIndex)
+        .replace(/\\/g, '')
+        .slice(2);
+    videoUrl = `http://${videoUrl}`;
 
-    for (let format of interestedFormats) {
-        let urlEndIndex: number = 0;
-        let formatIndex = 0;
-
-        while (interestedHtml.indexOf(format, urlEndIndex) !== -1) {
-            formatIndex = interestedHtml.indexOf(format, urlEndIndex)
-            let urlStartIndex: number;
-
-            if (formatIndex !== -1) {
-                urlStartIndex = (formatIndex + format.length);
-                urlEndIndex = (interestedHtml.indexOf(mediaType, urlStartIndex) + mediaType.length);
-                let videoUrl = interestedHtml
-                    .slice(urlStartIndex, urlEndIndex)
-                    .replace(/\\/g, '')
-                    .slice(2);
-                videoUrl = `http://${videoUrl}`;
-
-                videoUrls.push(videoUrl);
-            }
-        }
-    }
-
-    return videoUrls;
+    return videoUrl;
 }

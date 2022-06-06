@@ -3,14 +3,12 @@ import { environment } from '@environments/environment';
 import { Film, FilmsFilters, ShortFilm, ShortFilmsResponse } from '@interfaces/film';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { FilmsRepository } from '@repositories/film';
 import { map, Observable } from 'rxjs';
 
 @Injectable()
 export class FilmsService {
     constructor(
-        private readonly httpService: HttpService,
-        private readonly filmsRepository: FilmsRepository
+        private readonly httpService: HttpService
     ) {}
 
     public getAllShort(filters: FilmsFilters): Observable<ShortFilmsResponse> {
@@ -37,10 +35,5 @@ export class FilmsService {
             .pipe(
                 map((response) => response.data.data[0])
             );
-    }
-
-    // FIXME: Move to independent service
-    public getAllDownloaded(): ShortFilm[] {
-        return this.filmsRepository.getAll();
     }
 }
