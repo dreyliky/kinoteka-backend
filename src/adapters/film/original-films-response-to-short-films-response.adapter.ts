@@ -1,4 +1,4 @@
-import { OriginalFilmsResponse, ShortFilmsResponse } from '@interfaces';
+import { OriginalFilmsResponse, ShortFilmsResponse } from '@interfaces/film';
 import { adaptFilmToShortFilm } from './film-to-short-film.adapter';
 
 export function adaptOriginalFilmsResponseToShortFilmsResponse(response: OriginalFilmsResponse): ShortFilmsResponse {

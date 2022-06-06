@@ -1,11 +1,10 @@
-import { adaptFilmToShortFilm, adaptOriginalFilmsResponseToShortFilmsResponse } from '@adapters';
-import { VIDEOCDN_TOKEN } from '@data';
-import { Film, FilmsFilters, ShortFilm, ShortFilmsResponse } from '@interfaces';
+import { adaptFilmToShortFilm, adaptOriginalFilmsResponseToShortFilmsResponse } from '@adapters/film';
+import { environment } from '@environments/environment';
+import { Film, FilmsFilters, ShortFilm, ShortFilmsResponse } from '@interfaces/film';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { FilmsRepository } from '@repositories';
+import { FilmsRepository } from '@repositories/film';
 import { map, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class FilmsService {
@@ -17,7 +16,7 @@ export class FilmsService {
     public getAllShort(filters: FilmsFilters): Observable<ShortFilmsResponse> {
         return this.httpService.get(
             `${environment.videoCdnHost}/movies`,
-            { params: { ...filters, api_token: VIDEOCDN_TOKEN } }
+            { params: { ...filters, api_token: environment.videoCdnToken } }
         )
             .pipe(
                 map((response) => adaptOriginalFilmsResponseToShortFilmsResponse(response.data))
@@ -33,7 +32,7 @@ export class FilmsService {
 
     public get(kinopoiskId: string): Observable<Film> {
         return this.httpService.get(
-            `${environment.videoCdnHost}/movies?api_token=${VIDEOCDN_TOKEN}&query=${kinopoiskId}&field=kinopoisk_id`
+            `${environment.videoCdnHost}/movies?api_token=${environment.videoCdnToken}&query=${kinopoiskId}&field=kinopoisk_id`
         )
             .pipe(
                 map((response) => response.data.data[0])

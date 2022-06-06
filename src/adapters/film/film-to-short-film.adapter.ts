@@ -1,4 +1,4 @@
-import { Film, ShortFilm } from '@interfaces';
+import { Film, ShortFilm } from '@interfaces/film';
 
 export function adaptFilmToShortFilm(film: Film): ShortFilm {
     return {

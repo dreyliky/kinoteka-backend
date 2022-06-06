@@ -1,7 +1,7 @@
-import { FilmDownloadStateEnum } from '@enums';
-import { FilmMediaFileMetadata, FilmsFilters, ShortFilm, ShortFilmsResponse } from '@interfaces';
+import { FilmDownloadStateEnum } from '@enums/film';
+import { FilmMediaFileMetadata, FilmsFilters, ShortFilm, ShortFilmsResponse } from '@interfaces/film';
 import { Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { FilmDownloadStateService, FilmMediaFilesService, FilmsDownloadingQueueService, FilmsService } from '@services';
+import { FilmDownloadStateService, FilmMediaFilesService, FilmsDownloadingQueueService, FilmsService } from '@services/film';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 

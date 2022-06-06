@@ -1,9 +1,9 @@
-import { FileDownloaderService } from '@core';
-import { convertFilmIframeHtmlToFileUrl } from '@helpers';
-import { ShortFilm } from '@interfaces';
+import { convertFilmIframeHtmlToFileUrl } from '@helpers/film';
+import { ShortFilm } from '@interfaces/film';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { FilmsRepository } from '@repositories';
+import { FilmsRepository } from '@repositories/film';
+import { FileDownloaderService } from '@services/core';
 import { map, Observable, of } from 'rxjs';
 import { catchError, concatAll, delayWhen, filter, finalize, switchMap, take } from 'rxjs/operators';
 

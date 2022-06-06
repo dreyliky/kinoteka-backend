@@ -1,7 +1,7 @@
-import { FilmDownloadStateEnum } from '@enums';
+import { FilmDownloadStateEnum } from '@enums/film';
 import { Injectable } from '@nestjs/common';
-import { FilmsRepository } from '@repositories';
-import { FilmsDownloadingQueueState } from '@states';
+import { FilmsRepository } from '@repositories/film';
+import { FilmsDownloadingQueueState } from '@states/film';
 
 @Injectable()
 export class FilmDownloadStateService {

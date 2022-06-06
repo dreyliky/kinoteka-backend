@@ -1,4 +1,4 @@
-import { ShortFilm } from '@interfaces';
+import { ShortFilm } from '@interfaces/film';
 import { Injectable } from '@nestjs/common';
 import { LocalStorage } from 'node-localstorage';
 

@@ -1,5 +1,5 @@
-import { adaptFilmToFilmMediaFiles } from '@adapters';
-import { Film, FilmMediaFileMetadata } from '@interfaces';
+import { adaptFilmToFilmMediaFiles } from '@adapters/film';
+import { Film, FilmMediaFileMetadata } from '@interfaces/film';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

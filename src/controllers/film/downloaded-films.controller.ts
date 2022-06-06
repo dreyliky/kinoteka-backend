@@ -1,6 +1,6 @@
-import { ShortFilm } from '@interfaces';
+import { ShortFilm } from '@interfaces/film';
 import { Controller, Delete, Get, Param, Response } from '@nestjs/common';
-import { FilmDownloaderService, FilmsService } from '@services';
+import { FilmDownloaderService, FilmsService } from '@services/film';
 
 @Controller('films/downloaded')
 export class DownloadedFilmsController {

@@ -1,7 +1,7 @@
-import { adaptShortFilmQueueToDto } from '@adapters';
-import { ShortFilmQueueDto } from '@interfaces';
+import { adaptShortFilmQueueToDto } from '@adapters/film';
+import { ShortFilmQueueDto } from '@interfaces/film';
 import { Controller, Delete, Get, Param } from '@nestjs/common';
-import { FilmsDownloadingQueueService } from '@services';
+import { FilmsDownloadingQueueService } from '@services/film';
 
 @Controller('films/downloading')
 export class DownloadingFilmsController {

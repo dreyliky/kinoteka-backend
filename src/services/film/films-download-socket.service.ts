@@ -1,9 +1,9 @@
-import { ShortFilmQueue } from '@classes';
-import { SocketService } from '@core';
-import { SocketEventEnum } from '@enums';
-import { FilmProgressDto } from '@interfaces';
+import { ShortFilmQueue } from '@classes/core';
+import { SocketEventEnum } from '@enums/core';
+import { FilmProgressDto } from '@interfaces/film';
 import { Injectable } from '@nestjs/common';
-import { FilmsDownloadingQueueState } from '@states';
+import { SocketService } from '@services/core';
+import { FilmsDownloadingQueueState } from '@states/film';
 import { tap } from 'rxjs/operators';
 
 @Injectable()

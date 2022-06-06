@@ -1,7 +1,7 @@
-import { ShortFilmQueue } from '@classes';
-import { ShortFilm } from '@interfaces';
+import { ShortFilmQueue } from '@classes/core';
+import { ShortFilm } from '@interfaces/film';
 import { Injectable } from '@nestjs/common';
-import { FilmsDownloadingQueueState } from '@states';
+import { FilmsDownloadingQueueState } from '@states/film';
 import { catchError, throwError } from 'rxjs';
 import { FilmDownloaderService } from './film-downloader.service';
 

@@ -1,7 +1,7 @@
-import { SocketService } from '@core';
-import { SocketEventEnum } from '@enums';
+import { SocketEventEnum } from '@enums/core';
 import { Injectable } from '@nestjs/common';
-import { FilmsDownloadingQueueState } from '@states';
+import { SocketService } from '@services/core';
+import { FilmsDownloadingQueueState } from '@states/film';
 import { map } from 'rxjs/operators';
 
 @Injectable()

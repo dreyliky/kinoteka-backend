@@ -1,4 +1,4 @@
-import { ShortFilm } from '@interfaces';
+import { ShortFilm } from '@interfaces/film';
 import { BehaviorSubject, Subject } from 'rxjs';
 
 export class ShortFilmQueue {

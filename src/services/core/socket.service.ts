@@ -1,4 +1,4 @@
-import { SocketEventEnum } from '@enums';
+import { SocketEventEnum } from '@enums/core';
 import { Injectable } from '@nestjs/common';
 import { Observable, Subject } from 'rxjs';
 import { Server, Socket } from 'socket.io';

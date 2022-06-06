@@ -1,4 +1,4 @@
-import { Film, FilmMediaFileMetadata } from '@interfaces';
+import { Film, FilmMediaFileMetadata } from '@interfaces/film';
 
 export function adaptFilmToFilmMediaFiles(film: Film): FilmMediaFileMetadata[] {
     return film.media
