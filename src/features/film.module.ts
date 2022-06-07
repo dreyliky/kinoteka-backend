@@ -1,8 +1,14 @@
-import { DownloadedFilmsController, DownloadingFilmsController, FilmsController } from '@controllers/film';
+import {
+    DownloadedFilmsController,
+    DownloadingFilmsController,
+    FavoriteFilmsController,
+    FilmsController
+} from '@controllers/film';
 import { Module } from '@nestjs/common';
-import { FilmsRepository } from '@repositories/film';
+import { FavoriteFilmsRepository, FilmsRepository } from '@repositories/film';
 import {
     DownloadedFilmsService,
+    FavoriteFilmsService,
     FilmDownloaderService,
     FilmDownloadStateService,
     FilmMediaPathService,
@@ -21,10 +27,13 @@ import { SharedModule } from '../shared.module';
     controllers: [
         FilmsController,
         DownloadedFilmsController,
-        DownloadingFilmsController
+        DownloadingFilmsController,
+        FavoriteFilmsController
     ],
     providers: [
         FilmsRepository,
+        FavoriteFilmsRepository,
+        FavoriteFilmsService,
         DownloadedFilmsService,
         FilmMediaPathService,
         FilmDownloadStateService,
