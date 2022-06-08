@@ -1,6 +1,6 @@
-import { Film, FilmMediaFileMetadata } from '@interfaces/film';
+import { Film, FilmShortMedia } from '@interfaces/film';
 
-export function adaptFilmToFilmMediaFiles(film: Film): FilmMediaFileMetadata[] {
+export function adaptFilmToFilmShortMedia(film: Film): FilmShortMedia[] {
     return film.media
         .map((media) => ({
             id: media.id,

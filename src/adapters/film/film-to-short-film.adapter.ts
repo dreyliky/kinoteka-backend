@@ -1,5 +1,5 @@
 import { Film, ShortFilm } from '@interfaces/film';
-import { adaptFilmToFilmMediaFiles } from './film-to-film-media-files.adapter';
+import { adaptFilmToFilmShortMedia } from './film-to-film-short-media.adapter';
 
 export function adaptFilmToShortFilm(film: Film): ShortFilm {
     return {
@@ -8,6 +8,6 @@ export function adaptFilmToShortFilm(film: Film): ShortFilm {
         year: film.year,
         iframeSrc: film.preview_iframe_src,
         previewUrl: `https://st.kp.yandex.net/images/sm_film/${film.kinopoisk_id}.jpg`,
-        media: adaptFilmToFilmMediaFiles(film)
+        media: adaptFilmToFilmShortMedia(film)
     };
 }

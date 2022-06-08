@@ -1,7 +1,5 @@
-import { ShortFilm } from './film-short.interface';
-import { Film } from './film.interface';
-
-interface BaseFilmsResponse {
+export interface VideoCdnResponse<T> {
+    readonly data: T[];
     readonly result: boolean;
     readonly current_page: number;
     readonly first_page_url: string;
@@ -15,12 +13,4 @@ interface BaseFilmsResponse {
     readonly to: number;
     readonly total: number;
     readonly total_count: number;
-}
-
-export interface OriginalFilmsResponse extends BaseFilmsResponse {
-    readonly data: Film[];
-}
-
-export interface ShortFilmsResponse extends BaseFilmsResponse {
-    readonly data: ShortFilm[];
 }

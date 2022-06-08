@@ -1,6 +1,7 @@
 import { adaptFilmToShortFilm, adaptOriginalFilmsResponseToShortFilmsResponse } from '@adapters/film';
 import { environment } from '@environments/environment';
-import { Film, FilmsFilters, ShortFilm, ShortFilmsResponse } from '@interfaces/film';
+import { VideoCdnFilters, VideoCdnResponse } from '@interfaces/core';
+import { Film, ShortFilm } from '@interfaces/film';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
@@ -11,7 +12,7 @@ export class FilmsService {
         private readonly httpService: HttpService
     ) {}
 
-    public getAllShort(filters: FilmsFilters): Observable<ShortFilmsResponse> {
+    public getAllShort(filters: VideoCdnFilters): Observable<VideoCdnResponse<ShortFilm>> {
         return this.httpService.get(
             `${environment.videoCdnHost}/movies`,
             { params: { ...filters, api_token: environment.videoCdnToken } }

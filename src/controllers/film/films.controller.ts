@@ -1,5 +1,6 @@
 import { FilmDownloadStateEnum } from '@enums/film';
-import { FilmsFilters, ShortFilm, ShortFilmsResponse } from '@interfaces/film';
+import { VideoCdnFilters, VideoCdnResponse } from '@interfaces/core';
+import { ShortFilm } from '@interfaces/film';
 import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { FilmDownloadStateService, FilmsDownloadingQueueService, FilmsService } from '@services/film';
 import { Observable } from 'rxjs';
@@ -14,7 +15,7 @@ export class FilmsController {
     ) {}
 
     @Get()
-    public getAll(@Query() filters: FilmsFilters): Observable<ShortFilmsResponse> {
+    public getAll(@Query() filters: VideoCdnFilters): Observable<VideoCdnResponse<ShortFilm>> {
         return this.filmsService.getAllShort(filters);
     }
 

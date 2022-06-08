@@ -1,10 +1,13 @@
 import { HttpModule } from '@nestjs/axios';
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { FileDownloaderService, OsService, SocketService } from '@services/core';
 
 @Module({
     imports: [
-        HttpModule
+        HttpModule,
+        CacheModule.register({
+            ttl: (1000 * 30)
+        })
     ],
     providers: [
         SocketService,
@@ -13,6 +16,7 @@ import { FileDownloaderService, OsService, SocketService } from '@services/core'
     ],
     exports: [
         HttpModule,
+        CacheModule,
 
         SocketService,
         FileDownloaderService,

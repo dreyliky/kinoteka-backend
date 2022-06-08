@@ -1,4 +1,4 @@
-export interface FilmMediaFileMetadata {
+export interface FilmShortMedia {
     readonly id: number;
     readonly translationId: number;
     readonly maxQuality: number;

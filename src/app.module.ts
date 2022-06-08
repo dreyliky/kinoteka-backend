@@ -1,11 +1,17 @@
 import { Module } from '@nestjs/common';
-import { FilmModule } from './features';
+import {
+    FilmModule,
+    SettingsModule,
+    TvSeriesModule
+} from './features';
 import { SharedModule } from './shared.module';
 
 @Module({
     imports: [
         SharedModule,
-        FilmModule
+        FilmModule,
+        TvSeriesModule,
+        SettingsModule
     ]
 })
 export class AppModule {}

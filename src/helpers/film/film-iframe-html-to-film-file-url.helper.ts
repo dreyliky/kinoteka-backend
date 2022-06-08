@@ -1,4 +1,4 @@
-import { FilmMediaFileMetadata } from '@interfaces/film';
+import { FilmShortMedia } from '@interfaces/film';
 
 const mediaType = '.mp4';
 const htmlPartFrom = '<input type="hidden" id="files" value="';
@@ -8,7 +8,7 @@ interface TranslationsWithRawUrls {
     [translationId: string]: string;
 }
 
-export function convertFilmIframeHtmlToFileUrl(html: string, media: FilmMediaFileMetadata): string {
+export function convertFilmIframeHtmlToFileUrl(html: string, media: FilmShortMedia): string {
     const interestedFormat = `[${media.maxQuality}p]`;
     const htmlPartFromIndex = (html.indexOf(htmlPartFrom) + htmlPartFrom.length);
     const htmlPartToIndex = html.indexOf(htmlPartTo, htmlPartFromIndex);
