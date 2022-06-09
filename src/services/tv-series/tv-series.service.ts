@@ -1,7 +1,7 @@
-import { adaptTvSeriesResponseToShortTvSeriesResponse } from '@adapters/tv-series';
+import { adaptTvSeriesResponseToShortTvSeriesResponse, adaptTvSeriesToShortTvSeries } from '@adapters/tv-series';
 import { environment } from '@environments/environment';
 import { VideoCdnFilters, VideoCdnResponse } from '@interfaces/core';
-import { ShortTvSeries } from '@interfaces/tv-series';
+import { ShortTvSeries, TvSeries } from '@interfaces/tv-series';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
@@ -11,6 +11,16 @@ export class TvSeriesService {
     constructor(
         private readonly httpService: HttpService
     ) {}
+
+    public getShort(kinopoiskId: string): Observable<ShortTvSeries> {
+        return this.httpService.get<VideoCdnResponse<TvSeries>>(
+            `${environment.videoCdnHost}/tv-series`,
+            { params: { field: kinopoiskId, api_token: environment.videoCdnToken } }
+        )
+            .pipe(
+                map((response) => adaptTvSeriesToShortTvSeries(response.data.data[0]))
+            );
+    }
 
     public getAllShort(filters: VideoCdnFilters): Observable<VideoCdnResponse<ShortTvSeries>> {
         return this.httpService.get(
