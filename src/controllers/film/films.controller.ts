@@ -19,6 +19,11 @@ export class FilmsController {
         return this.filmsService.getAllShort(filters);
     }
 
+    @Get(':kinopoiskId')
+    public get(@Param('kinopoiskId') kinopoiskId: string): Observable<ShortFilm> {
+        return this.filmsService.getShort(kinopoiskId);
+    }
+
     @Post(':kinopoiskId/download/:translationId')
     public download(
         @Param('kinopoiskId') kinopoiskId: string,

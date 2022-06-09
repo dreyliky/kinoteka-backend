@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import {
+    ClientModule,
     FilmModule,
     SettingsModule,
     TvSeriesModule
@@ -9,6 +10,7 @@ import { SharedModule } from './shared.module';
 @Module({
     imports: [
         SharedModule,
+        ClientModule,
         FilmModule,
         TvSeriesModule,
         SettingsModule

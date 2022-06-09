@@ -44,6 +44,19 @@ export class SocketService {
             .forEach((socket) => socket.emit(event, data));
     }
 
+    public notify(socketId: string, event: SocketEventEnum, data: unknown): void {
+        const socket = this.findSocketById(socketId);
+
+        if (socket) {
+            socket.emit(event, data);
+        }
+    }
+
+    public findSocketById(socketId: string): Socket {
+        return this.sockets
+            .find((socket) => (socket.id === socketId));
+    }
+
     private removeFromSockets(socket: Socket): void {
         const socketIndex = this.sockets.indexOf(socket);
 

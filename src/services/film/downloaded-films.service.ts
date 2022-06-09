@@ -11,4 +11,8 @@ export class DownloadedFilmsService {
     public getAll(): DownloadedFilm[] {
         return this.filmsRepository.getAll();
     }
+
+    public get(kinopoiskId: string): DownloadedFilm {
+        return this.filmsRepository.get(kinopoiskId);
+    }
 }

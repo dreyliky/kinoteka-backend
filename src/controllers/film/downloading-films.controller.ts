@@ -3,7 +3,7 @@ import { MediaDownloadQueueDto } from '@interfaces/core';
 import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { FilmsDownloadingQueueService } from '@services/film';
 
-@Controller('films/downloading')
+@Controller('downloading-films')
 export class DownloadingFilmsController {
     constructor(
         private readonly filmsDownloadingQueueService: FilmsDownloadingQueueService

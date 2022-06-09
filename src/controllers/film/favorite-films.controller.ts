@@ -3,7 +3,7 @@ import { Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { FavoriteFilmsService, FilmsService } from '@services/film';
 import { Observable, tap } from 'rxjs';
 
-@Controller('films/favorites')
+@Controller('favorites-films')
 export class FavoriteFilmsController {
     constructor(
         private readonly favoriteFilmsService: FavoriteFilmsService,
