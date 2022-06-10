@@ -1,7 +1,7 @@
 import { FilmDownloadStateEnum } from '@enums/film';
 import { VideoCdnFilters, VideoCdnResponse } from '@interfaces/core';
 import { ShortFilm } from '@interfaces/film';
-import { Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { CacheInterceptor, Controller, Get, Param, Post, Query, UseInterceptors } from '@nestjs/common';
 import { FilmDownloadStateService, FilmsDownloadingQueueService, FilmsService } from '@services/film';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -15,11 +15,13 @@ export class FilmsController {
     ) {}
 
     @Get()
+    @UseInterceptors(CacheInterceptor)
     public getAll(@Query() filters: VideoCdnFilters): Observable<VideoCdnResponse<ShortFilm>> {
         return this.filmsService.getAllShort(filters);
     }
 
     @Get(':kinopoiskId')
+    @UseInterceptors(CacheInterceptor)
     public get(@Param('kinopoiskId') kinopoiskId: string): Observable<ShortFilm> {
         return this.filmsService.getShort(kinopoiskId);
     }
