@@ -5,10 +5,11 @@ export function adaptTvSeriesEpisodeToShortEpisode(
     episode: TvSeriesEpisode
 ): TvSeriesShortEpisode {
     return {
-        kinopoiskId: episode.kinopoisk_id,
         title: episode.ru_title,
+        num: episode.num,
         seasonNum: episode.season_num,
         releaseDate: episode.released,
+        duration: episode.media[0].duration,
         media: episode.media
             .map((media) => adaptTvSeriesEpisodeMediaToShortMedia(media))
     };
