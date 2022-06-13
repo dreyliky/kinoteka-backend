@@ -18,7 +18,7 @@ export class FileDownloaderService {
                 url,
                 fileName,
                 directory,
-                maxAttempts: 999,
+                maxAttempts: 1,
                 cloneFiles: false,
                 onProgress: (percents) => subscriber.next(+percents)
             });

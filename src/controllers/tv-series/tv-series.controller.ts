@@ -5,7 +5,7 @@ import { TvSeriesService } from '@services/tv-series';
 import { Observable } from 'rxjs';
 
 @Controller('tv-serieses')
-export class TvSeriesController {
+export class TvSeriesesController {
     constructor(
         private readonly tvSeriesService: TvSeriesService
     ) {}

@@ -1,8 +1,10 @@
-import { FilmDownloadStateEnum } from '@enums/film';
+import { FilmDownloadStatusEnum } from '@enums/film';
+import { MediaTypeEnum } from '@enums/media';
 import { VideoCdnFilters, VideoCdnResponse } from '@interfaces/core';
-import { ShortFilm } from '@interfaces/film';
+import { FilmDownloaderOptions, ShortFilm } from '@interfaces/film';
 import { CacheInterceptor, Controller, Get, Param, Post, Query, UseInterceptors } from '@nestjs/common';
-import { FilmDownloadStateService, FilmsDownloadingQueueService, FilmsService } from '@services/film';
+import { DownloadedFilmsService, FilmsService } from '@services/film';
+import { MediaDownloadingQueueService } from '@services/media';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -10,8 +12,8 @@ import { tap } from 'rxjs/operators';
 export class FilmsController {
     constructor(
         private readonly filmsService: FilmsService,
-        private readonly filmsDownloadingQueueService: FilmsDownloadingQueueService,
-        private readonly filmDownloadStateService: FilmDownloadStateService
+        private readonly downloadedFilmsService: DownloadedFilmsService,
+        private readonly mediaDownloadingQueueService: MediaDownloadingQueueService
     ) {}
 
     @Get()
@@ -26,6 +28,20 @@ export class FilmsController {
         return this.filmsService.getShort(kinopoiskId);
     }
 
+    @Get(':kinopoiskId/status')
+    public getStatus(@Param('kinopoiskId') kinopoiskId: string): FilmDownloadStatusEnum {
+        const mediaInDownloadQueue = this.mediaDownloadingQueueService
+            .getBySelector<ShortFilm>((media) => (media.kinopoiskId === kinopoiskId));
+
+        if (this.downloadedFilmsService.includes(kinopoiskId)) {
+            return FilmDownloadStatusEnum.Downloaded;
+        } else if (mediaInDownloadQueue) {
+            return FilmDownloadStatusEnum.Downloading;
+        }
+
+        return FilmDownloadStatusEnum.Undownloaded;
+    }
+
     @Post(':kinopoiskId/download/:translationId')
     public download(
         @Param('kinopoiskId') kinopoiskId: string,
@@ -33,12 +49,14 @@ export class FilmsController {
     ): Observable<unknown> {
         return this.filmsService.getShort(kinopoiskId)
             .pipe(
-                tap((film: ShortFilm) => this.filmsDownloadingQueueService.add(film, +translationId))
-            );
-    }
+                tap((film: ShortFilm) => {
+                    const downloadOptions: FilmDownloaderOptions = {
+                        kinopoiskId,
+                        translationId: +translationId
+                    };
 
-    @Get(':kinopoiskId/state')
-    public getState(@Param('kinopoiskId') kinopoiskId: string): FilmDownloadStateEnum {
-        return this.filmDownloadStateService.check(kinopoiskId);
+                    this.mediaDownloadingQueueService.add(MediaTypeEnum.Film, film, downloadOptions);
+                })
+            );
     }
 }

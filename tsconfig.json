@@ -16,6 +16,7 @@
             "@core/*": ["./src/core/*"],
             "@helpers/*": ["./src/helpers/*"],
             "@adapters/*": ["./src/adapters/*"],
+            "@factories/*": ["./src/factories/*"],
             "@enums/*": ["./src/enums/*"],
             "@states/*": ["./src/states/*"],
             "@services/*": ["./src/services/*"],

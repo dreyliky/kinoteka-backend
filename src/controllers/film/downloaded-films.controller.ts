@@ -35,7 +35,9 @@ export class DownloadedFilmsController {
     }
 
     @Delete(':kinopoiskId')
-    public delete(@Param('kinopoiskId') kinopoiskId: string): boolean {
-        return this.filmsDownloaderService.delete(kinopoiskId);
+    public delete(@Param('kinopoiskId') kinopoiskId: string): null {
+        this.filmsDownloaderService.deleteById(kinopoiskId);
+
+        return null;
     }
 }

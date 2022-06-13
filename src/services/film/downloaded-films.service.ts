@@ -15,4 +15,8 @@ export class DownloadedFilmsService {
     public get(kinopoiskId: string): DownloadedFilm {
         return this.filmsRepository.get(kinopoiskId);
     }
+
+    public includes(kinopoiskId: string): boolean {
+        return this.filmsRepository.includes(kinopoiskId);
+    }
 }

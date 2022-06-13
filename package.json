@@ -32,7 +32,9 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "socket.io": "^4.5.1"
+    "socket.io": "^4.5.1",
+    "uuid": "^8.3.2",
+    "ytdl-core": "^4.11.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
@@ -43,6 +45,7 @@
     "@types/jest": "^26.0.24",
     "@types/node": "^16.0.0",
     "@types/supertest": "^2.0.11",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
     "eslint": "^7.30.0",
