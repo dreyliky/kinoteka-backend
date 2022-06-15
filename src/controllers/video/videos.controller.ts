@@ -2,7 +2,7 @@ import { adaptYoutubeVideoResponseToShortVideo } from '@adapters/video';
 import { MediaTypeEnum } from '@enums/media';
 import { VideoDownloadStatusEnum } from '@enums/video';
 import { ShortYoutubeVideo, VideoDownloaderOptions } from '@interfaces/video';
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, CacheInterceptor, Controller, Get, Param, Post, Query, UseInterceptors } from '@nestjs/common';
 import { YoutubeService } from '@services/core';
 import { MediaDownloadingQueueService } from '@services/media';
 import { DownloadedVideosService } from '@services/video';
@@ -17,6 +17,7 @@ export class VideosController {
     ) {}
 
     @Get('info')
+    @UseInterceptors(CacheInterceptor)
     public getInfo(
         @Query('url') youtubeVideoUrl: string
     ): Observable<ShortYoutubeVideo> {
