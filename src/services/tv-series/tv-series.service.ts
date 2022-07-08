@@ -15,7 +15,7 @@ export class TvSeriesService {
     public getShort(kinopoiskId: string): Observable<ShortTvSeries> {
         return this.httpService.get<VideoCdnResponse<TvSeries>>(
             `${environment.videoCdnHost}/tv-series`,
-            { params: { field: kinopoiskId, api_token: environment.videoCdnToken } }
+            { params: { query: kinopoiskId, field: 'kinopoisk_id', api_token: environment.videoCdnToken } }
         )
             .pipe(
                 map((response) => adaptTvSeriesToShortTvSeries(response.data.data[0]))

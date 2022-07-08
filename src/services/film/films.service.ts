@@ -31,7 +31,8 @@ export class FilmsService {
 
     public get(kinopoiskId: string): Observable<Film> {
         return this.httpService.get(
-            `${environment.videoCdnHost}/movies?api_token=${environment.videoCdnToken}&query=${kinopoiskId}&field=kinopoisk_id`
+            `${environment.videoCdnHost}/movies`,
+            { params: { query: kinopoiskId, field: 'kinopoisk_id', api_token: environment.videoCdnToken } }
         )
             .pipe(
                 map((response) => response.data.data[0])
