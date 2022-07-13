@@ -6,6 +6,7 @@ import {
     YoutubeService
 } from './core';
 import {
+    BookmarkedFilmsService,
     DownloadedFilmsService,
     FavoriteFilmsService,
     FilmDownloaderService,
@@ -19,7 +20,12 @@ import {
 } from './media';
 import { SettingsService } from './settings';
 import { TvSeriesService } from './tv-series';
-import { DownloadedVideosService, VideoDownloaderService, VideoMediaPathService, VideosService } from './video';
+import {
+    DownloadedVideosService,
+    VideoDownloaderService,
+    VideoMediaPathService,
+    VideosService
+} from './video';
 
 export const SERVICES = [
     FileDownloaderService,
@@ -35,6 +41,7 @@ export const SERVICES = [
     FilmDownloaderService,
     FilmMediaPathService,
     FilmsService,
+    BookmarkedFilmsService,
 
     MediaDownloadSocketService,
     MediaDownloadingCountSocketService,

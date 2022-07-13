@@ -4,7 +4,7 @@ import { LocalStorage } from 'node-localstorage';
 
 @Injectable()
 export class FavoriteFilmsRepository {
-    private readonly localStorage = new LocalStorage(`${global.__dbFolder}`);
+    private readonly localStorage = new LocalStorage(global.__dbFolder);
     private readonly storageKey = `favorite-films`;
 
     public getAll(): ShortFilm[] {
