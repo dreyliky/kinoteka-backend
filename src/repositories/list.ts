@@ -1,6 +1,6 @@
 import { BookmarkedFilmsRepository, FavoriteFilmsRepository, FilmsRepository } from './film';
 import { SettingsRepository } from './settings';
-import { VideosRepository } from './video';
+import { BookmarkedVideosRepository, VideosRepository } from './video';
 
 export const REPOSITORIES = [
     FilmsRepository,
@@ -9,5 +9,6 @@ export const REPOSITORIES = [
 
     SettingsRepository,
 
-    VideosRepository
+    VideosRepository,
+    BookmarkedVideosRepository
 ];

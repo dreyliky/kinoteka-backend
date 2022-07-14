@@ -24,4 +24,8 @@ export class BookmarkedFilmsService {
     public remove(kinopoiskId: string, bookmark: BookmarkEnum): void {
         this.bookmarkedFilmsRepository.remove(kinopoiskId, bookmark);
     }
+
+    public clear(kinopoiskId: string): void {
+        this.bookmarkedFilmsRepository.clear(kinopoiskId);
+    }
 }

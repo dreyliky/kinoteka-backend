@@ -1,6 +1,6 @@
 import { DownloadedFilm } from '@interfaces/film';
 import { Controller, Delete, Get, Param, Response } from '@nestjs/common';
-import { DownloadedFilmsService, FilmDownloaderService, FilmMediaPathService } from '@services/film';
+import { BookmarkedFilmsService, DownloadedFilmsService, FilmDownloaderService, FilmMediaPathService } from '@services/film';
 
 @Controller('downloaded-films')
 export class DownloadedFilmsController {
@@ -8,6 +8,7 @@ export class DownloadedFilmsController {
         private readonly downloadedFilmsService: DownloadedFilmsService,
         private readonly filmsDownloaderService: FilmDownloaderService,
         private readonly filmMediaPathService: FilmMediaPathService,
+        private readonly bookmarkedFilmsService: BookmarkedFilmsService
     ) {}
 
     @Get()
@@ -37,6 +38,7 @@ export class DownloadedFilmsController {
     @Delete(':kinopoiskId')
     public delete(@Param('kinopoiskId') kinopoiskId: string): null {
         this.filmsDownloaderService.deleteById(kinopoiskId);
+        this.bookmarkedFilmsService.clear(kinopoiskId);
 
         return null;
     }

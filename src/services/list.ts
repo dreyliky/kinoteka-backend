@@ -21,6 +21,7 @@ import {
 import { SettingsService } from './settings';
 import { TvSeriesService } from './tv-series';
 import {
+    BookmarkedVideosService,
     DownloadedVideosService,
     VideoDownloaderService,
     VideoMediaPathService,
@@ -54,5 +55,6 @@ export const SERVICES = [
     VideosService,
     VideoMediaPathService,
     VideoDownloaderService,
-    DownloadedVideosService
+    DownloadedVideosService,
+    BookmarkedVideosService
 ];

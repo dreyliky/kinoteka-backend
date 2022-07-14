@@ -2,7 +2,7 @@ import { ClientsController } from './client';
 import { BookmarkedFilmsController, DownloadedFilmsController, FavoriteFilmsController, FilmsController } from './film';
 import { DownloadingMediaController } from './media';
 import { TvSeriesesController } from './tv-series';
-import { DownloadedVideosController, VideosController } from './video';
+import { BookmarkedVideosController, DownloadedVideosController, VideosController } from './video';
 
 export const CONTROLLERS = [
     ClientsController,
@@ -17,5 +17,6 @@ export const CONTROLLERS = [
     TvSeriesesController,
 
     VideosController,
-    DownloadedVideosController
+    DownloadedVideosController,
+    BookmarkedVideosController
 ];
