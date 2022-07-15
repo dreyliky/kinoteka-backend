@@ -45,6 +45,10 @@ export class BookmarkedFilmsRepository {
             .filter((currentBookmark) => (currentBookmark !== bookmark));
         bookmarksDictionary[kinopoiskId] = filteredBookmarks;
 
+        if (!filteredBookmarks.length) {
+            delete bookmarksDictionary[kinopoiskId];
+        }
+
         this.localStorage.setItem(
             this.storageKey,
             JSON.stringify(bookmarksDictionary)

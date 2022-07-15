@@ -19,7 +19,7 @@ import {
     MediaDownloadSocketService
 } from './media';
 import { SettingsService } from './settings';
-import { TvSeriesService } from './tv-series';
+import { BookmarkedTvSeriesesService, TvSeriesService } from './tv-series';
 import {
     BookmarkedVideosService,
     DownloadedVideosService,
@@ -51,6 +51,7 @@ export const SERVICES = [
     SettingsService,
 
     TvSeriesService,
+    BookmarkedTvSeriesesService,
 
     VideosService,
     VideoMediaPathService,

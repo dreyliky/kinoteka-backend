@@ -4,9 +4,9 @@ import { Injectable } from '@nestjs/common';
 import { LocalStorage } from 'node-localstorage';
 
 @Injectable()
-export class BookmarkedVideosRepository {
+export class BookmarkedTvSeriesesRepository {
     private readonly localStorage = new LocalStorage(global.__dbFolder);
-    private readonly storageKey = `bookmarked-videos`;
+    private readonly storageKey = `bookmarked-tv-serieses`;
 
     public getAsDictionary(): MediaBookmarksDictionary {
         try {
@@ -16,21 +16,21 @@ export class BookmarkedVideosRepository {
         }
     }
 
-    public getAll(videoId: string): BookmarkEnum[] {
+    public getAll(kinopoiskId: string): BookmarkEnum[] {
         const bookmarksDictionary = this.getAsDictionary();
 
-        return this.getAllFromDictionary(bookmarksDictionary, videoId);
+        return this.getAllFromDictionary(bookmarksDictionary, kinopoiskId);
     }
 
-    public add(videoId: string, bookmark: BookmarkEnum): void {
+    public add(kinopoiskId: string, bookmark: BookmarkEnum): void {
         const bookmarksDictionary = this.getAsDictionary();
-        const bookmarks = this.getAllFromDictionary(bookmarksDictionary, videoId);
+        const bookmarks = this.getAllFromDictionary(bookmarksDictionary, kinopoiskId);
 
         if (!bookmarks.includes(bookmark)) {
             bookmarks.push(bookmark);
         }
 
-        bookmarksDictionary[videoId] = bookmarks;
+        bookmarksDictionary[kinopoiskId] = bookmarks;
 
         this.localStorage.setItem(
             this.storageKey,
@@ -38,15 +38,15 @@ export class BookmarkedVideosRepository {
         );
     }
 
-    public remove(videoId: string, bookmark: BookmarkEnum): void {
+    public remove(kinopoiskId: string, bookmark: BookmarkEnum): void {
         const bookmarksDictionary = this.getAsDictionary();
-        const bookmarks = this.getAllFromDictionary(bookmarksDictionary, videoId);
+        const bookmarks = this.getAllFromDictionary(bookmarksDictionary, kinopoiskId);
         const filteredBookmarks = bookmarks
             .filter((currentBookmark) => (currentBookmark !== bookmark));
-        bookmarksDictionary[videoId] = filteredBookmarks;
+        bookmarksDictionary[kinopoiskId] = filteredBookmarks;
 
         if (!filteredBookmarks.length) {
-            delete bookmarksDictionary[videoId];
+            delete bookmarksDictionary[kinopoiskId];
         }
 
         this.localStorage.setItem(
@@ -55,9 +55,9 @@ export class BookmarkedVideosRepository {
         );
     }
 
-    public clear(videoId: string): void {
+    public clear(kinopoiskId: string): void {
         const bookmarksDictionary = this.getAsDictionary();
-        delete bookmarksDictionary[videoId];
+        delete bookmarksDictionary[kinopoiskId];
 
         this.localStorage.setItem(
             this.storageKey,
@@ -65,15 +65,15 @@ export class BookmarkedVideosRepository {
         );
     }
 
-    public includes(videoId: string, bookmark: BookmarkEnum): boolean {
+    public includes(kinopoiskId: string, bookmark: BookmarkEnum): boolean {
         const bookmarksDictionary = this.getAsDictionary();
-        const bookmarks = this.getAllFromDictionary(bookmarksDictionary, videoId);
+        const bookmarks = this.getAllFromDictionary(bookmarksDictionary, kinopoiskId);
 
         return bookmarks
             .some((currentBookmark) => (currentBookmark === bookmark));
     }
 
-    private getAllFromDictionary(dictionary: MediaBookmarksDictionary, videoId: string): BookmarkEnum[] {
-        return (dictionary[videoId] ?? []);
+    private getAllFromDictionary(dictionary: MediaBookmarksDictionary, kinopoiskId: string): BookmarkEnum[] {
+        return (dictionary[kinopoiskId] ?? []);
     }
 }
