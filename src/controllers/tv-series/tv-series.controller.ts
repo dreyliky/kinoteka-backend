@@ -1,8 +1,8 @@
 import { VideoCdnFilters, VideoCdnResponse } from '@interfaces/core';
-import { ShortTvSeries } from '@interfaces/tv-series';
-import { CacheInterceptor, Controller, Get, Param, Query, UseInterceptors } from '@nestjs/common';
+import { ShortTvSeries, TvSeriesDownloadParameters } from '@interfaces/tv-series';
+import { Body, CacheInterceptor, Controller, Get, Param, Post, Query, UseInterceptors } from '@nestjs/common';
 import { TvSeriesService } from '@services/tv-series';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Controller('tv-serieses')
 export class TvSeriesesController {
@@ -20,5 +20,13 @@ export class TvSeriesesController {
     @UseInterceptors(CacheInterceptor)
     public get(@Param('kinopoiskId') kinopoiskId: string): Observable<ShortTvSeries> {
         return this.tvSeriesService.getShort(kinopoiskId);
+    }
+
+    @Post('/download')
+    public download(
+        @Body() parameters: TvSeriesDownloadParameters
+    ): Observable<unknown> {
+        console.log(parameters);
+        return of(null);
     }
 }
