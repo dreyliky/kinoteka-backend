@@ -12,8 +12,12 @@
         "baseUrl": "./",
         "incremental": true,
         "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
         "paths": {
             "@core/*": ["./src/core/*"],
+            "@data/*": ["./src/data/*"],
+            "@db/*": ["./src/db/*"],
             "@helpers/*": ["./src/helpers/*"],
             "@adapters/*": ["./src/adapters/*"],
             "@factories/*": ["./src/factories/*"],

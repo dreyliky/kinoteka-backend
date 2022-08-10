@@ -1,9 +1,13 @@
+import { AssetsController } from './assets';
 import { ClientsController } from './client';
 import {
     BookmarkedFilmsController,
     DownloadedFilmsController,
     FavoriteFilmsController,
-    FilmsController
+    FilmPlaylistsCategoriesController,
+    FilmPlaylistsController,
+    FilmsController,
+    PlaylistFilmsController
 } from './film';
 import { DownloadingMediaController } from './media';
 import { BookmarkedTvSeriesesController, TvSeriesesController } from './tv-series';
@@ -14,12 +18,17 @@ import {
 } from './video';
 
 export const CONTROLLERS = [
+    AssetsController,
+
     ClientsController,
 
+    BookmarkedFilmsController,
     DownloadedFilmsController,
     FavoriteFilmsController,
+    FilmPlaylistsCategoriesController,
+    FilmPlaylistsController,
     FilmsController,
-    BookmarkedFilmsController,
+    PlaylistFilmsController,
 
     DownloadingMediaController,
 

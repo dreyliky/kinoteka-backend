@@ -1,7 +1,6 @@
 import { ClientCastService, ClientsService } from './client';
 import {
     FileDownloaderService,
-    OsService,
     SocketService,
     YoutubeService
 } from './core';
@@ -11,7 +10,10 @@ import {
     FavoriteFilmsService,
     FilmDownloaderService,
     FilmMediaPathService,
-    FilmsService
+    FilmPlaylistCategoriesService,
+    FilmPlaylistsService,
+    FilmsService,
+    PlaylistFilmsService
 } from './film';
 import {
     MediaDownloadingCountSocketService,
@@ -30,7 +32,6 @@ import {
 
 export const SERVICES = [
     FileDownloaderService,
-    OsService,
     SocketService,
     YoutubeService,
 
@@ -43,6 +44,9 @@ export const SERVICES = [
     FilmMediaPathService,
     FilmsService,
     BookmarkedFilmsService,
+    FilmPlaylistsService,
+    FilmPlaylistCategoriesService,
+    PlaylistFilmsService,
 
     MediaDownloadSocketService,
     MediaDownloadingCountSocketService,
