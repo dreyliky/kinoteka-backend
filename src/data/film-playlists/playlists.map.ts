@@ -17,6 +17,21 @@ export const FILM_PLAYLISTS_MAP = new Map<PlaylistCategory, Playlist<PlaylistEnu
             imageUrl: 'popular.webp'
         },
         {
+            id: PlaylistEnum.Blockbusters,
+            name: 'Блокбастери',
+            imageUrl: 'blockbusters.png'
+        },
+        {
+            id: PlaylistEnum.MustWatch,
+            name: 'Варто подивитись',
+            imageUrl: 'must-watch.png'
+        },
+        {
+            id: PlaylistEnum.BestAdaptations,
+            name: 'Найкращі екранізації',
+            imageUrl: 'adaptations.png'
+        },
+        {
             id: PlaylistEnum.BestAboutApocalypse,
             name: 'Найкращі фільми про апокаліпсис',
             imageUrl: 'best-apocalypse.png'
@@ -38,6 +53,83 @@ export const FILM_PLAYLISTS_MAP = new Map<PlaylistCategory, Playlist<PlaylistEnu
         }
     ]],
     [PlaylistCategory.Genres, [
+        {
+            id: PlaylistEnum.Comedies,
+            name: 'Комедії',
+            imageUrl: 'comedies.png'
+        },
+        {
+            id: PlaylistEnum.Horrors,
+            name: 'Жахи',
+            imageUrl: 'horrors.png'
+        },
+        {
+            id: PlaylistEnum.Fiction,
+            name: 'Фантастика',
+            imageUrl: 'fiction.png'
+        },
+        {
+            id: PlaylistEnum.Thrillers,
+            name: 'Трилери',
+            imageUrl: 'thrillers.png'
+        },
+        {
+            id: PlaylistEnum.Actions,
+            name: 'Бойовики',
+            imageUrl: 'actions.png'
+        },
+        {
+            id: PlaylistEnum.Melodramas,
+            name: 'Мелодрами',
+            imageUrl: 'melodramas.png'
+        },
+        {
+            id: PlaylistEnum.Detectives,
+            name: 'Детективи',
+            imageUrl: 'detectives.png'
+        },
+        {
+            id: PlaylistEnum.Adventures,
+            name: 'Пригоди',
+            imageUrl: 'adventures.webp'
+        },
+        {
+            id: PlaylistEnum.Fantasy,
+            name: 'Фентезі',
+            imageUrl: 'fantasy.png'
+        },
+        {
+            id: PlaylistEnum.Military,
+            name: 'Воєнні',
+            imageUrl: 'military.png'
+        },
+        {
+            id: PlaylistEnum.Historical,
+            name: 'Історичні',
+            imageUrl: 'historical.webp'
+        },
+        {
+            id: PlaylistEnum.Dramas,
+            name: 'Драми',
+            imageUrl: 'dramas.png'
+        },
+        {
+            id: PlaylistEnum.Crimes,
+            name: 'Кримінал',
+            imageUrl: 'crimes.webp'
+        }
+    ]],
+    [PlaylistCategory.Thematic, [
+        {
+            id: PlaylistEnum.DigitalReleases,
+            name: 'Цифрові релізи',
+            imageUrl: 'digital-releases.jfif'
+        },
+        {
+            id: PlaylistEnum.Marvel,
+            name: 'Кіновсесвіт Marvel',
+            imageUrl: 'marvel.jfif'
+        },
         {
             id: PlaylistEnum.AboutCartoonsForKids,
             name: 'Мультфільми для дітей',
@@ -107,13 +199,6 @@ export const FILM_PLAYLISTS_MAP = new Map<PlaylistCategory, Playlist<PlaylistEnu
             id: PlaylistEnum.AboutZombies,
             name: 'Фільми про зомбі',
             imageUrl: 'about-zombies.png'
-        }
-    ]],
-    [PlaylistCategory.Other, [
-        {
-            id: PlaylistEnum.AboutZombies,
-            name: 'Цифрові релізи',
-            imageUrl: 'digital-releases.jfif'
         }
     ]]
 ]);

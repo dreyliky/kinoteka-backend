@@ -11,7 +11,7 @@ export const FILM_PLAYLIST_CATEGORIES: PlaylistCategory<FilmPlaylistCategoryEnum
         name: 'Жанри'
     },
     {
-        id: FilmPlaylistCategoryEnum.Other,
-        name: 'Інші'
+        id: FilmPlaylistCategoryEnum.Thematic,
+        name: 'Тематика'
     }
 ];

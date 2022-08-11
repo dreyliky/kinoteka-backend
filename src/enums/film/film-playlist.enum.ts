@@ -6,7 +6,26 @@ export enum FilmPlaylistEnum {
     BestBasedByComics,
     BestForKids,
     BestOf2021Year,
-    // Genre
+    BestAdaptations,
+    Blockbusters,
+    MustWatch,
+    // Genres
+    Comedies,
+    Horrors,
+    Fiction,
+    Thrillers,
+    Actions,
+    Melodramas,
+    Detectives,
+    Adventures,
+    Fantasy,
+    Military,
+    Historical,
+    Dramas,
+    Crimes,
+    // Thematic
+    DigitalReleases,
+    Marvel,
     AboutCartoonsForKids,
     AboutCatastrophe,
     AboutComedianActions,
@@ -21,6 +40,4 @@ export enum FilmPlaylistEnum {
     AboutTeenagers,
     AboutVampires,
     AboutZombies,
-    // Other
-    DigitalReleases
 }

@@ -1,12 +1,30 @@
 import { FilmPlaylistEnum as Playlist } from '@enums/film';
 import {
     BEST_ABOUT_APOCALYPSE_FILM_IDS,
+    BEST_ADAPTATION_FILM_IDS,
     BEST_BASED_BY_COMICS_FILM_IDS,
     BEST_FOR_KIDS_FILM_IDS,
     BEST_OF_2021_YEAR_FILM_IDS,
+    BLOCKBUSTER_FILM_IDS,
+    MUST_WATCH_FILM_IDS,
     POPULAR_FILM_IDS,
     TOP_500_FILM_IDS
 } from './best';
+import {
+    ACTION_FILM_IDS,
+    ADVENTURE_FILM_IDS,
+    COMEDY_FILM_IDS,
+    CRIME_FILM_IDS,
+    DETECTIVE_FILM_IDS,
+    DRAMA_FILM_IDS,
+    FANTASY_FILM_IDS,
+    FICTION_FILM_IDS,
+    HISTORICAL_FILM_IDS,
+    HORROR_FILM_IDS,
+    MELODRAMA_FILM_IDS,
+    MILITARY_FILM_IDS,
+    THRILLERS_FILM_IDS
+} from './genre';
 import {
     ABOUT_CARTOONS_FOR_KIDS_FILM_IDS,
     ABOUT_CATASTROPHE_FILM_IDS,
@@ -21,17 +39,36 @@ import {
     ABOUT_SPACE_FILM_IDS,
     ABOUT_TEENAGERS_FILM_IDS,
     ABOUT_VAMPIRES_FILM_IDS,
-    ABOUT_ZOMBIES_FILM_IDS
-} from './genre';
-import { DIGITAL_RELEASES_FILM_IDS } from './other';
+    ABOUT_ZOMBIES_FILM_IDS,
+    DIGITAL_RELEASES_FILM_IDS,
+    MARVEL_FILM_IDS
+} from './thematic';
 
 export const FILM_PLAYLISTS_CONTENT_MAP = new Map<Playlist, string[]>([
     [Playlist.Top500, TOP_500_FILM_IDS],
     [Playlist.Popular, POPULAR_FILM_IDS],
+    [Playlist.Blockbusters, BLOCKBUSTER_FILM_IDS],
+    [Playlist.MustWatch, MUST_WATCH_FILM_IDS],
+    [Playlist.BestAdaptations, BEST_ADAPTATION_FILM_IDS],
     [Playlist.BestAboutApocalypse, BEST_ABOUT_APOCALYPSE_FILM_IDS],
     [Playlist.BestBasedByComics, BEST_BASED_BY_COMICS_FILM_IDS],
     [Playlist.BestForKids, BEST_FOR_KIDS_FILM_IDS],
     [Playlist.BestOf2021Year, BEST_OF_2021_YEAR_FILM_IDS],
+    [Playlist.Comedies, COMEDY_FILM_IDS],
+    [Playlist.Horrors, HORROR_FILM_IDS],
+    [Playlist.Fiction, FICTION_FILM_IDS],
+    [Playlist.Thrillers, THRILLERS_FILM_IDS],
+    [Playlist.Actions, ACTION_FILM_IDS],
+    [Playlist.Melodramas, MELODRAMA_FILM_IDS],
+    [Playlist.Detectives, DETECTIVE_FILM_IDS],
+    [Playlist.Adventures, ADVENTURE_FILM_IDS],
+    [Playlist.Fantasy, FANTASY_FILM_IDS],
+    [Playlist.Military, MILITARY_FILM_IDS],
+    [Playlist.Historical, HISTORICAL_FILM_IDS],
+    [Playlist.Dramas, DRAMA_FILM_IDS],
+    [Playlist.Crimes, CRIME_FILM_IDS],
+    [Playlist.DigitalReleases, DIGITAL_RELEASES_FILM_IDS],
+    [Playlist.Marvel, MARVEL_FILM_IDS],
     [Playlist.AboutCartoonsForKids, ABOUT_CARTOONS_FOR_KIDS_FILM_IDS],
     [Playlist.AboutCatastrophe, ABOUT_CATASTROPHE_FILM_IDS],
     [Playlist.AboutComedianActions, ABOUT_COMEDIAN_ACTIONS_FILM_IDS],
@@ -45,6 +82,5 @@ export const FILM_PLAYLISTS_CONTENT_MAP = new Map<Playlist, string[]>([
     [Playlist.AboutSpace, ABOUT_SPACE_FILM_IDS],
     [Playlist.AboutTeenagers, ABOUT_TEENAGERS_FILM_IDS],
     [Playlist.AboutVampires, ABOUT_VAMPIRES_FILM_IDS],
-    [Playlist.AboutZombies, ABOUT_ZOMBIES_FILM_IDS],
-    [Playlist.DigitalReleases, DIGITAL_RELEASES_FILM_IDS],
+    [Playlist.AboutZombies, ABOUT_ZOMBIES_FILM_IDS]
 ]);
