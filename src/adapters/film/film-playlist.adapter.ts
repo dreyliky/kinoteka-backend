@@ -5,6 +5,6 @@ import { Playlist } from '@interfaces/playlist';
 export function adaptFilmPlaylist(playlist: Playlist<FilmPlaylistEnum>): Playlist<FilmPlaylistEnum> {
     return {
         ...playlist,
-        imageUrl: `${AppHelper.url}/assets/images/film/playlist/${playlist.imageUrl}`
+        imageUrl: `${AppHelper.host}/assets/images/film/playlist/${playlist.imageUrl}`
     };
 }

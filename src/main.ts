@@ -1,7 +1,7 @@
-import { AppHelper } from '@helpers/core';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
+global.__appPort = 3000;
 global.__basedir = __dirname;
 global.__downloadFolder = `C:/_kinoteka_downloads`;
 global.__dbFolder = `C:/_kinoteka_db`;
@@ -9,11 +9,7 @@ global.__dbFolder = `C:/_kinoteka_db`;
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, { cors: { origin: true } });
 
-    await app.listen(3000);
-
-    const appUrl = await app.getUrl();
-
-    AppHelper.setUrl(appUrl);
+    await app.listen(global.__appPort);
 }
 bootstrap();
 
