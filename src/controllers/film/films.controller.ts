@@ -1,7 +1,7 @@
 import { FilmDownloadStatusEnum } from '@enums/film';
 import { MediaTypeEnum } from '@enums/media';
 import { VideoCdnFilters, VideoCdnResponse } from '@interfaces/core';
-import { FilmDownloaderOptions, ShortFilm } from '@interfaces/film';
+import { FilmDetailedInfoDto, FilmDownloaderOptions, ShortFilm } from '@interfaces/film';
 import { CacheInterceptor, Controller, Get, Param, Post, Query, UseInterceptors } from '@nestjs/common';
 import { DownloadedFilmsService, FilmsService } from '@services/film';
 import { MediaDownloadingQueueService } from '@services/media';
@@ -26,6 +26,12 @@ export class FilmsController {
     @UseInterceptors(CacheInterceptor)
     public get(@Param('kinopoiskId') kinopoiskId: string): Observable<ShortFilm> {
         return this.filmsService.getShort(kinopoiskId);
+    }
+
+    @Get(':kinopoiskId/detailed')
+    @UseInterceptors(CacheInterceptor)
+    public getDetailedInfo(@Param('kinopoiskId') kinopoiskId: string): Observable<FilmDetailedInfoDto> {
+        return this.filmsService.getDetailedInfo(kinopoiskId);
     }
 
     @Get(':kinopoiskId/status')
